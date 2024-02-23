@@ -54,6 +54,17 @@ After training the official baseline (corresponding to the script /recipes/dcase
 
 The notebook /plot.ipynb provides scripts to reproduce the Figures from the article. We report the scores that we obtained in the file /misc/scores.txt, so that this notebook can be used as is, without retraining.
 
-## Repository structure
+## Set of augmentations
 
-This repository follows the structure of the official DCASE2023 repository. In particular, the training script for the regularized model is stored at /recipes/dcase2023_task4_baseline/irct_train_sed.py and /recipes/dcase2023_task4_baseline/local/irct_sed_trainer.py. The training script for the probe is stored at /recipes/dcase2023_task4_baseline/probe_train_sed.py and /recipes/dcase2023_task4_baseline/local/probe_sed_trainer.py.
+We indicate below the list of audio augmentations used in this study, along with their range of parameters.
+
+| Set       | Augmentation      | Parameter     | Range                   | 
+|---|---|---|---|
+| $\tau_0$  | Mixup             | $\alpha$      | [0.5, 1]                |
+| $\tau_1$  | Time masking      | duration      | 100 ms                  |
+|           |                   | n masks       | [0, 5]                  |
+|           | Time shifting     | shift         | [0, 50 ms]              |
+|           | Pitch shifting    | shift         | [-250 cents, 250 cents] |
+|$\tau_2$   | Frequency masking | log Mel bands | [0, 20]                 |
+|           | FilterAugment     | attenuation   | [-6.5 dB, 7 dB]         |
+|           |                   | n bands       | [2, 5]                  |
